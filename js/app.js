@@ -1,36 +1,40 @@
 
 $(document).ready(function(){
 
+////////////////Global Variable Initialization////////////////////////////////
 	var guessCount =0;
 	var guess =0;
 	var userGuess =0;
 	var randNum =0;
-	
+/////////////////////////////////////////////////////////////////////////////////////		
 
-		//$('#guessButton').click(function() {
-	
+		
+////////////////Play Game when user guesses a number////////////////////////////////
 	$('#guessButton').click(playGame);
 		
 		function playGame() {		
 
 			guess = $('#userGuess').val();
 			userGuess = +guess;
-			//var guessCount =0; // $("#count").text(parseInt($("#count").text()) + 1);
+			
 		
 			guessCount++;
 
-			alert("User Guess Is: " + userGuess + "  Guess Count Is: " + guessCount);
+			//alert("User Guess Is: " + userGuess + "  Guess Count Is: " + guessCount);
 			$("#count").html(guessCount);
 			userGuessFunc(userGuess, randNum);
+
+			$('#guessList'). append('<li class="appendLiItem">' + userGuess + '</li>');
 			
-			return false; // stops page from automatically reloading when #guessButton 
-						//selected. Use the below link  as a referene
+			
+			return false; // stops page from automatically reloading when #guessButton selected 
+						//Use the below link  as a reference
 						//http://stackoverflow.com/questions/1878264/how-do-i-make-an-html-button-not-reload-the-page
 		}
-		//});
+/////////////////////////////////////////////////////////////////////////////////////			
 
 	
-
+////////////////Clear ALL values to start a newGame when .new Button selected///////////////////////////////////
 	$('.new').click(newGame);
 	
 	function newGame () {
@@ -38,21 +42,14 @@ $(document).ready(function(){
 		//$('#userGuess').val("");
 		guessCount = 0;
 		$('#guessForm')[0].reset();
+		$("ul").empty();
 		$("#feedback").html("Make your Guess!");
-
-		randNumFunc();
-
-			//setTimeout(function (){
-
-             	//playGame();//something you want delayed
-
-        	//}, 800);
-		
+		$("#count").html("0");
+		randNumFunc();		
 
 	}
-	
-	
-	
+/////////////////////////////////////////////////////////////////////////////////////	
+		
 ////////////////randNumFunc generates random number between 1-100////////////////////
 	var randNumFunc =function () {//randomIntFromInterval()
 	
@@ -69,12 +66,12 @@ $(document).ready(function(){
 
 ////////////////userGuessFunc determines if user is Hot|| Cold /////////////////////
 	var userGuessFunc =function (arg1, arg2) {
-		alert('rand number is: ' + randNum);
+		//alert('rand number is: ' + randNum);
 		var guessCalc = +(Math.abs(arg2 - arg1));
-		//alert('guessCalc is: ' + guessCalc);
+		
 
 		if (guessCalc > 50) {
-			alert(userGuess + ' - ' + randNum + ' = ' + (userGuess - randNum));
+			//alert(userGuess + ' - ' + randNum + ' = ' + (userGuess - randNum));
 			$("#feedback").html("You're ICE Cold");
 		
 		} else if ((guessCalc <= 50) && (guessCalc > 30)) {
@@ -93,7 +90,7 @@ $(document).ready(function(){
 			$("#feedback").html("You're BOILING HOT");
 
 		} else {
-			$("#feedback").html("You have guessed it!!! " + arg1 + " = " + arg2);
+			$("#feedback").html("You have guessed it!!! The # is: " + arg2);
 		}
 
 	}
@@ -101,7 +98,7 @@ $(document).ready(function(){
 /////////////////////////////////////////////////////////////////////////////////////
 	
 
-/////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////DIRECTIONS////////////////////////////////////////////
 	/*--- Display information modal box ---*/
   	$(".what").click(function(){
     	$(".overlay").fadeIn(1000);
