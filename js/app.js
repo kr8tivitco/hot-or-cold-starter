@@ -12,12 +12,16 @@ $(document).ready(function(){
 ////////////////Play Game when user guesses a number////////////////////////////////
 	$('#guessButton').click(playGame);
 		
-		function playGame() {		
+		function playGame() {	
+
+		//if (($.isNumeric( $('#guess').val() )) && (userGuess >0) && (userGuess < 101)) {
+		//if (!isNaN('#userGuess')) {	
 
 			guess = $('#userGuess').val();
 			userGuess = +guess;
 			
-		
+		if (($.isNumeric( $('#userGuess').val() )) && (userGuess >0) && (userGuess < 101)) {
+			
 			guessCount++;
 
 			//alert("User Guess Is: " + userGuess + "  Guess Count Is: " + guessCount);
@@ -26,28 +30,35 @@ $(document).ready(function(){
 
 			$('#guessList'). append('<li class="appendLiItem">' + userGuess + '</li>');
 			
+		} else {
+			$("#feedback").html("Enter a NUMBER between 1-100");
 			
+			$('#guessForm')[0].reset();
+		}
+
 			return false; // stops page from automatically reloading when #guessButton selected 
 						//Use the below link  as a reference
 						//http://stackoverflow.com/questions/1878264/how-do-i-make-an-html-button-not-reload-the-page
-		}
+	}
 /////////////////////////////////////////////////////////////////////////////////////			
 
 	
 ////////////////Clear ALL values to start a newGame when .new Button selected///////////////////////////////////
 	$('.new').click(newGame);
 	
-	function newGame () {
+		function newGame () {
 
-		//$('#userGuess').val("");
-		guessCount = 0;
-		$('#guessForm')[0].reset();
-		$("ul").empty();
-		$("#feedback").html("Make your Guess!");
-		$("#count").html("0");
-		randNumFunc();		
+			//$('#userGuess').val("");
+			guessCount = 0;
+			$('#guessForm')[0].reset();
+			$("ul").empty();
+			$("#feedback").html("Make your Guess!");
+			$("#count").html("0");
+			randNumFunc();
+			
 
-	}
+			return false;
+		}
 /////////////////////////////////////////////////////////////////////////////////////	
 		
 ////////////////randNumFunc generates random number between 1-100////////////////////
