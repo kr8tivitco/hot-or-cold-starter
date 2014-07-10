@@ -62,13 +62,23 @@ $(document).ready(function(){
 /////////////////////////////////////////////////////////////////////////////////////	
 		
 ////////////////randNumFunc generates random number between 1-100////////////////////
-	var randNumFunc =function () {//randomIntFromInterval()
-	
-    	var minNum  = 1;
-    	var maxNum = 100;
 
-    	randNum = Math.floor(Math.random()*(maxNum-minNum+1)+minNum);
-    return randNum;
+/*	var randNumFunc = function() { //randomIntFromInterval()
+			var minNum = 1;
+			var maxNum = 100;
+
+			randNum = Math.floor(Math.random() * (maxNum - minNum + 1) + minNum);
+			return randNum;
+	}
+*/
+/*Blanche's version 
+* Why this approach? By putting the variables minNum and maxNum inside the
+* function, they are re-initialized every time the function is called.
+* Which means it takes longer to run.
+*/
+	var randNumFunc = function() {
+		randNum = Math.floor((Math.random() * 100) + 1);
+		return randNum;
 	}
 /////////////////////////////////////////////////////////////////////////////////////
 	
@@ -77,11 +87,38 @@ $(document).ready(function(){
 
 ////////////////userGuessFunc determines if user is Hot|| Cold /////////////////////
 	var userGuessFunc =function (arg1, arg2) {
-		//alert('rand number is: ' + randNum);
+		alert('rand number is: ' + randNum);
 		var guessCalc = +(Math.abs(arg2 - arg1));
 		
+		if (guessCalc == 0) {
+				//alert(userGuess + ' - ' + randNum + ' = ' + (userGuess - randNum));
+				$("#feedback").html("You have guessed it!!! The # is: " + arg2);
 
-		if (guessCalc > 50) {
+		} else if (guessCalc < 5) {
+				$("#feedback").html("You're BOILING HOT");
+
+		} else if (guessCalc < 10) {
+				$("#feedback").html("You're VERY Hot");
+
+		} else if (guessCalc < 20) {
+				$("#feedback").html("You're Hot");
+
+		} else if (guessCalc < 30) {
+				$("#feedback").html("You're Warm");
+
+		} else if (guessCalc < 40) {
+				$("#feedback").html("You're Chilli");
+
+		} else if (guessCalc < 50) {
+				$("#feedback").html("You're Cold");
+					
+		} else {
+				$("#feedback").html("You're ICE Cold");
+			
+		}
+
+
+		/*if (guessCalc > 50) {
 			//alert(userGuess + ' - ' + randNum + ' = ' + (userGuess - randNum));
 			$("#feedback").html("You're ICE Cold");
 		
@@ -102,7 +139,7 @@ $(document).ready(function(){
 
 		} else {
 			$("#feedback").html("You have guessed it!!! The # is: " + arg2);
-		}
+		}*/
 
 	}
 
